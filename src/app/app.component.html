@@ -1,0 +1,55 @@
+<hello name="{{ name }}"></hello>
+<p>Start editing to see some magic happen :)</p>
+
+<p>
+  <button (click)="connect()">Connect to chat</button>
+</p>
+
+<div *ngIf="connected">
+  <div>
+    <button (click)="startConversation()">Start a conversation</button>
+    <div>
+      {{ startConversationResult }}
+    </div>
+  </div>
+
+  <div>
+    <h3>My Conversations</h3>
+    <ul>
+      <li *ngFor="let channel of conversations">
+        {{ channel.name }}
+        <button (click)="getMessages(channel)">Get messages</button>
+      </li>
+    </ul>
+    <div>
+      {{ listConversationsResult }}
+    </div>
+  </div>
+
+  <div>
+    <h3>Messages in the conversation</h3>
+    <ul>
+      <li *ngFor="let message of messages">
+        {{ message['message'] }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="selectedChannel">
+    <h3>Send a message to the selected channel</h3>
+    <table>
+      <tr>
+        <td>
+          <input
+            type="text"
+            placeholder="Type your message..."
+            (input)="updateTextMessage($event)"
+          />
+        </td>
+        <td>
+          <button (click)="sendMessage()">Send</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
